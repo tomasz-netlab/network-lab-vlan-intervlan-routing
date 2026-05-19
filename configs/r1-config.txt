@@ -1,0 +1,51 @@
+hostname R1
+security passwords min-length 12
+login block-for 300 attempts 3 within 120
+login on-failure log
+service password-encryption
+enable secret PassWD789101112
+username admin secret Password9101112
+banner motd # WARNING: Authorized access only. Violators will be prosecuted. #
+ip domain-name lab.local.ccna
+crypto key generate rsa
+ip ssh version 2
+ip ssh time-out 120
+ip ssh authentication-retries 3
+line console 0
+ login local
+ exec-timeout 300
+ logging synchronous
+line vty 0 15
+ login local
+ transport input ssh
+ exec-timeout 300
+interface g0/0/0.10
+ description VLAN 10
+ encapsulation dot1q 10
+ ip address 192.168.10.1 255.255.255.0
+ no ip proxy-arp
+ no shutdown
+interface g0/0/0.101
+ description VLAN 101
+ encapsulation dot1Q 101
+ ip address 192.168.100.1 255.255.255.248
+ no ip proxy-arp
+ no shutdown
+interface g0/0/0
+ description LINK-TO-SW1
+ no ip proxy-arp
+ no shutdown
+interface g0/0/1
+ ip address 203.0.113.1 255.255.255.252
+ description Link LAN -> WAN
+ no ip proxy-arp
+ no cdp enable
+ no shutdown
+ntp server 192.168.100.5
+logging buffered 16384
+service timestamps log datetime msec
+service timestamps debug datetime msec
+logging host 192.168.100.5
+logging trap debugging
+end
+copy running-config startup-config

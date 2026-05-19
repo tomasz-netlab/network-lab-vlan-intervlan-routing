@@ -1,0 +1,67 @@
+hostname SW1
+service password-encryption
+username admin secret Password9101112
+enable secret PassWD789101112
+banner motd # WARNING: Authorized access only. Violators will be prosecuted. #
+ip domain-name lab.local.ccna
+crypto key generate rsa
+ip ssh version 2
+ip ssh time-out 120
+ip ssh authentication-retries 3
+line console 0
+ login local
+ exec-timeout 300
+ logging synchronous
+line vty 0 15
+ login local
+ transport input ssh
+ exec-timeout 300
+vlan 10
+ name USERS
+vlan 101
+ name MANAGENENT
+vlan 99
+ name NATIVE
+vlan 999
+ name UNUSED
+interface vlan 101
+ description MANAGMENT
+ ip address 192.168.100.2 255.255.255.248
+ no shutdown
+exit
+ip default-gateway 192.168.100.1
+interface f0/24
+ description LINK-TO-SERVER
+ switchport mode access
+ switchport access vlan 101
+ switchport nonegotiate
+ no shutdown
+interface range f0/2-23, g0/2
+ description NOT IN USE
+ switchport mode access
+ switchport access vlan 999
+ switchport nonegotiate
+ shutdown
+interface g0/1
+ description TRUNK-TO-R1
+ switchport mode trunk
+ switchport trunk allowed vlan 10,101
+ switchport trunk native vlan 99
+ switchport nonegotiate
+ no shutdown
+interface f0/1
+ description PC1-ACCESS
+ switchport mode access
+ switchport access vlan 10
+ switchport nonegotiate
+ no shutdown
+spanning-tree portfast default
+spanning-tree portfast bpduguard default
+ntp server 192.168.100.5
+logging buffered 16384
+service timestamps log datetime msec
+service timestamps debug datetime msec
+logging host 192.168.100.5
+logging trap debugging
+end
+copy running-config startup-config
