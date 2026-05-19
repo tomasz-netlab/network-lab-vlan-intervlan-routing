@@ -32,7 +32,7 @@ A legal warning banner is configured before any login prompt. This is both a sec
 ### 1.3 Privileged EXEC Password
 
 ```
-enable secret PassWD789101112
+enable secret <ENABLE_SECRET>
 ```
 
 `enable secret` uses MD5 hashing (Type 5) by default in IOS 15.4. This is the strongest algorithm available in Packet Tracer. On a real IOS image, the preferred approach is:
@@ -46,7 +46,7 @@ This would produce a Type 9 hash (scrypt), significantly more resistant to brute
 ### 1.4 Local User Account
 
 ```
-username admin secret Password9101112
+username admin secret <ADMIN_SECRET>
 ```
 
 A local user account `admin` is created for SSH and console authentication. On a real IOS image, the account would be configured with privilege level 15 and scrypt hashing:
@@ -239,8 +239,8 @@ SW1 was configured with the same base hardening posture as R1:
 ```
 hostname SW1
 ip domain-name lab.local.ccna
-username admin secret Password9101112
-enable secret PassWD789101112
+username admin secret <ADMIN_SECRET>
+enable secret <ENABLE_SECRET>
 service password-encryption
 banner motd # WARNING: Authorized access only. Violators will be prosecuted. #
 ip ssh version 2
@@ -283,7 +283,7 @@ interface Vlan101
 ip default-gateway 192.168.100.1
 ```
 
-The SVI for VLAN 101 provides Layer 3 reachability for SSH management access to SW1. The default gateway points to R1’s management subinterface. Since SW1 operates at Layer 2, it requires a default gateway for any traffic that needs to leave its local segment.
+The SVI for VLAN 101 provides Layer 3 reachability for SSH management access to SW1. The default gateway points to R1's management subinterface. Since SW1 operates at Layer 2, it requires a default gateway for any traffic that needs to leave its local segment.
 
 ### 4.4 Trunk Port to R1
 
@@ -325,7 +325,7 @@ interface FastEthernet0/24
  no shutdown
 ```
 
-The server is placed in VLAN 101 (management segment), giving it direct Layer 2 adjacency with SW1’s management SVI and Layer 3 reachability to R1’s management subinterface.
+The server is placed in VLAN 101 (management segment), giving it direct Layer 2 adjacency with SW1's management SVI and Layer 3 reachability to R1's management subinterface.
 
 ### 4.7 Unused Ports
 
