@@ -192,22 +192,24 @@ no service bootp
 
 Each of these disables a legacy or unnecessary service that increases the attack surface of the device. They are included here as documentation of intended hardening posture, even though they could not be applied in this simulation environment.
 
-### 3.2 NTP Configuration
+### 3.2 NTP and Timezone Configuration
 
 ```
+clock timezone CET 1
 ntp server 192.168.100.5
 ```
 
 All devices synchronize time from the internal NTP server. Accurate time is essential for log correlation, certificate validity, and forensic analysis. Without synchronized time, it is impossible to reliably correlate events across multiple devices.
 
-The following commands were intended but are not supported in Packet Tracer:
+`clock timezone CET 1` sets the local timezone to Central European Time (UTC+1). This command is applied on both R1 and SW1, ensuring that log timestamps reflect the correct local time rather than UTC.
+
+The following command was intended but is not supported in Packet Tracer:
 
 ```
-clock timezone CET 1
 clock summer-time CEST recurring last Sun Mar 2:00 last Sun Oct 3:00
 ```
 
-On real IOS, these commands set the local timezone (CET, UTC+1) and configure automatic daylight saving time transition (CEST, UTC+2) for the Polish timezone.
+On real IOS, this command configures automatic daylight saving time transition to CEST (UTC+2), which is the correct setting for Poland. Without it, timestamps will be offset by one hour during summer time. This is documented in `lessons-learned.md`.
 
 ### 3.3 Syslog Configuration
 
@@ -354,9 +356,10 @@ PVST+ (Per-VLAN Spanning Tree Plus) is used, providing a separate STP instance p
 
 Since `portfast default` only applies to non-trunk ports, the trunk to R1 (Gi0/1) is automatically excluded from both PortFast and BPDUGuard — no per-interface override is required.
 
-### 4.9 SW1 Syslog and NTP
+### 4.9 SW1 Syslog, NTP and Timezone
 
 ```
+clock timezone CET 1
 service timestamps log datetime msec
 service timestamps debug datetime msec
 logging buffered 16384
@@ -365,7 +368,7 @@ logging host 192.168.100.5
 ntp server 192.168.100.5
 ```
 
-Identical syslog and NTP configuration as R1, ensuring consistent log format and time synchronization across all devices.
+Identical syslog, NTP and timezone configuration as R1, ensuring consistent log format and time synchronization across all devices.
 
 ---
 
