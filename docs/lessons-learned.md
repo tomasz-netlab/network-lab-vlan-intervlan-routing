@@ -132,7 +132,6 @@ Each of these is documented in `implementation.md` as intended hardening posture
 ## What would be done differently
 
 - Add `ip ssh source-interface` to restrict SSH to originate only from the management interface — not implemented but standard in hardening guides
-- Apply `exec-timeout` to a production-realistic value (5–10 minutes) from the start rather than treating it as a lab convenience setting
 - Test syslog reception explicitly on the server side, not just confirm forwarding from the device side
 - Use a named ACL if access-class filtering on VTY lines were added in a future iteration — named ACLs are easier to read and modify than numbered ones
 
