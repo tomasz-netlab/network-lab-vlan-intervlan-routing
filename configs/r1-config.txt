@@ -3,8 +3,8 @@ security passwords min-length 12
 login block-for 300 attempts 3 within 120
 login on-failure log
 service password-encryption
-enable secret PassWD789101112
-username admin secret Password9101112
+enable secret <ENABLE_SECRET>
+username admin secret <ADMIN_SECRET>
 banner motd # WARNING: Authorized access only. Violators will be prosecuted. #
 ip domain-name lab.local.ccna
 crypto key generate rsa

@@ -1,7 +1,7 @@
 hostname SW1
 service password-encryption
-username admin secret Password9101112
-enable secret PassWD789101112
+username admin secret <ADMIN_SECRET>
+enable secret <ENABLE_SECRET>
 banner motd # WARNING: Authorized access only. Violators will be prosecuted. #
 ip domain-name lab.local.ccna
 crypto key generate rsa
