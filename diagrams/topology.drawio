@@ -1,0 +1,73 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="AZrFvyqXHqn0pTPLqe4J" name="Page-1">
+    <mxGraphModel dx="1868" dy="1302" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="100" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;" value="Lab 01 — VLAN Segmentation, Inter-VLAN Routing and IOS Hardening" vertex="1">
+          <mxGeometry height="40" width="1000" x="300" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="200" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=11;fontStyle=1;verticalAlign=top;opacity=50;" value="WAN — Internet Simulation&#xa;203.0.113.0/30" vertex="1">
+          <mxGeometry height="240" width="360" x="1200" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="201" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;verticalAlign=top;opacity=50;" value="VLAN 101 — Management Zone&#xa;192.168.100.0/29" vertex="1">
+          <mxGeometry height="200" width="420" x="200" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="202" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;verticalAlign=top;opacity=50;" value="VLAN 10 — User Zone&#xa;192.168.10.0/24" vertex="1">
+          <mxGeometry height="200" width="300" x="200" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="10" parent="1" style="shape=mxgraph.cisco.computers_and_peripherals.pc;sketch=0;html=1;pointerEvents=1;dashed=0;fillColor=#036897;strokeColor=#ffffff;strokeWidth=2;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;" value="&lt;b&gt;PC1&lt;/b&gt;&#xa;192.168.10.10/24&#xa;VLAN 10 — USERS&#xa;SW1 Fa0/1" vertex="1">
+          <mxGeometry height="50" width="60" x="260" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="20" parent="1" style="shape=mxgraph.cisco.switches.workgroup_switch;sketch=0;html=1;pointerEvents=1;dashed=0;fillColor=#036897;strokeColor=#ffffff;strokeWidth=2;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;" value="&lt;b&gt;SW1&lt;/b&gt;&#xa;Cisco Catalyst 2960-24TT&#xa;SVI VLAN101: 192.168.100.2/29&#xa;GW: 192.168.100.1&#xa;Root Bridge (PVST+)" vertex="1">
+          <mxGeometry height="55" width="80" x="680" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="30" parent="1" style="shape=mxgraph.cisco.routers.router;sketch=0;html=1;pointerEvents=1;dashed=0;fillColor=#036897;strokeColor=#ffffff;strokeWidth=2;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;" value="&lt;b&gt;R1&lt;/b&gt;&#xa;Cisco ISR 4331&#xa;Gi0/0/0.10: 192.168.10.1/24&#xa;Gi0/0/0.101: 192.168.100.1/29&#xa;Gi0/0/1: 203.0.113.1/30" vertex="1">
+          <mxGeometry height="60" width="70" x="980" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="40" parent="1" style="shape=mxgraph.cisco.computers_and_peripherals.pc;sketch=0;html=1;pointerEvents=1;dashed=0;fillColor=#666666;strokeColor=#ffffff;strokeWidth=2;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;" value="&lt;b&gt;PC2 — WAN Host&lt;/b&gt;&#xa;203.0.113.2/30&#xa;Internet simulation&#xa;(TEST-NET-3 / RFC 5737)" vertex="1">
+          <mxGeometry height="50" width="60" x="1330" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="50" parent="1" style="shape=mxgraph.cisco.servers.standard_server;sketch=0;html=1;pointerEvents=1;dashed=0;fillColor=#036897;strokeColor=#ffffff;strokeWidth=2;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;" value="&lt;b&gt;Server&lt;/b&gt;&#xa;192.168.100.5/29&#xa;NTP + Syslog&#xa;VLAN 101 — SW1 Fa0/24" vertex="1">
+          <mxGeometry height="65" width="50" x="310" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="60" edge="1" parent="1" source="10" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#82b366;strokeWidth=2;" target="20" value="Fa0/1&#xa;Access VLAN 10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="61" edge="1" parent="1" source="20" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#0050ef;strokeWidth=3;fontStyle=1;" target="30" value="Gi0/1 → Gi0/0/0&#xa;802.1Q Trunk&#xa;Native: VLAN 99&#xa;Allowed: VLAN 10, 101&#xa;DTP disabled">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="62" edge="1" parent="1" source="30" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;strokeWidth=2;dashed=1;" target="40" value="Gi0/0/1&#xa;WAN /30&#xa;no cdp enable">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="63" edge="1" parent="1" source="50" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;strokeColor=#6c8ebf;strokeWidth=2;" target="20" value="Fa0/24&#xa;Access VLAN 101">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="300" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=12;" value="&lt;b&gt;VLAN Design&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="160" x="1200" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="301" parent="1" style="text;html=1;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=10;" value="VLAN 10 — USERS (192.168.10.0/24)" vertex="1">
+          <mxGeometry height="28" width="280" x="1200" y="455" as="geometry" />
+        </mxCell>
+        <mxCell id="302" parent="1" style="text;html=1;strokeColor=#d6b656;fillColor=#fff2cc;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=10;" value="VLAN 99 — NATIVE (no IP, trunk only)" vertex="1">
+          <mxGeometry height="28" width="280" x="1200" y="488" as="geometry" />
+        </mxCell>
+        <mxCell id="303" parent="1" style="text;html=1;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=10;" value="VLAN 101 — MANAGEMENT (192.168.100.0/29)" vertex="1">
+          <mxGeometry height="28" width="280" x="1200" y="521" as="geometry" />
+        </mxCell>
+        <mxCell id="304" parent="1" style="text;html=1;strokeColor=#666666;fillColor=#f5f5f5;fontColor=#333333;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=10;" value="VLAN 999 — UNUSED (all inactive ports, shutdown)" vertex="1">
+          <mxGeometry height="28" width="280" x="1200" y="554" as="geometry" />
+        </mxCell>
+        <mxCell id="400" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=12;" value="&lt;b&gt;Security Controls&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="200" x="1200" y="610" as="geometry" />
+        </mxCell>
+        <mxCell id="401" parent="1" style="text;html=1;strokeColor=#d6b656;fillColor=#fffacd;align=left;verticalAlign=top;whiteSpace=wrap;rounded=1;fontSize=10;spacingLeft=5;spacingTop=5;" value="🔒 SSH v2 only (RSA 4096) — Telnet blocked&#xa;🔒 login block-for 300 attempts 3 within 120&#xa;🔒 BPDUGuard + PortFast on access ports&#xa;🔒 DTP disabled (switchport nonegotiate)&#xa;🔒 Native VLAN 99 — no user traffic&#xa;🔒 Unused ports → VLAN 999 + shutdown&#xa;🔒 no cdp enable on WAN interface&#xa;🔒 no ip proxy-arp on all interfaces&#xa;🔒 Syslog + NTP → 192.168.100.5" vertex="1">
+          <mxGeometry height="170" width="300" x="1200" y="645" as="geometry" />
+        </mxCell>
+        <mxCell id="500" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;fontStyle=2;" value="Router-on-a-Stick&#xa;(subinterfaces Gi0/0/0.10 + Gi0/0/0.101)" vertex="1">
+          <mxGeometry height="60" width="220" x="820" y="160" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
