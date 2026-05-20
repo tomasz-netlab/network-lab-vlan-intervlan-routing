@@ -18,11 +18,7 @@ coherent security scenario rather than a collection of isolated commands.
 
 ## Topology
 
-```
-[PC1]───[SW1 (Cisco 2960)]───[R1 (Cisco ISR 4331)]───[PC2 - WAN Host]
-                    │
-              [Server: NTP + Syslog]
-```
+![Topology](diagrams/topology.drawio.png)
 
 | Device | Model | Role |
 |---|---|---|
@@ -121,10 +117,12 @@ Full verification output: [`docs/validation.md`](docs/validation.md)
 
 ## Documentation
 
-- [`docs/topology.md`](docs/topology.md) — topology, addressing, VLAN design, architectural decisions
+- [`docs/topology.md`](docs/topology.md) — topology, VLAN design, security zones and architectural decisions
+- [`docs/addressing-plan.md`](docs/addressing-plan.md) — full IP addressing, VLAN assignment, port mapping and subnet rationale
 - [`docs/implementation.md`](docs/implementation.md) — full configuration with reasoning behind each command
 - [`docs/validation.md`](docs/validation.md) — verification commands and results
 - [`docs/lessons-learned.md`](docs/lessons-learned.md) — deeper explanations, PT limitations, and possible extensions
+- [`diagrams/topology.drawio`](diagrams/topology.drawio) — editable topology diagram (draw.io source)
 
 ---
 
