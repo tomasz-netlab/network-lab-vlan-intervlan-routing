@@ -19,13 +19,13 @@ line vty 0 15
 vlan 10
  name USERS
 vlan 101
- name MANAGENENT
+ name MANAGEMENT
 vlan 99
  name NATIVE
 vlan 999
  name UNUSED
 interface vlan 101
- description MANAGMENT
+ description MANAGEMENT
  ip address 192.168.100.2 255.255.255.248
  no shutdown
 exit
