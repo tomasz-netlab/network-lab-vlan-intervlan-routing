@@ -6,6 +6,7 @@ service password-encryption
 enable secret <ENABLE_SECRET>
 username admin secret <ADMIN_SECRET>
 banner motd # WARNING: Authorized access only. Violators will be prosecuted. #
+clock timezone CET 1
 ip domain-name lab.local.ccna
 crypto key generate rsa
 ip ssh version 2
